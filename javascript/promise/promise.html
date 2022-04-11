@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // const promise1 = new Promise((resolve, reject)=>{
+        //     reject();
+        // });
+        // promise1
+        // .then(()=>{
+        //     console.log("then!");
+        // })
+        // .catch(()=>{
+        //     console.log("catch!");
+        // })
+
+        // function startAsync(age){
+        //         if(age > 20) return `${age} success`;
+        //         else throw new Error(`${age} is not over 20`);
+        // }
+        function setTimeoutPromise(ms) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(), ms);
+  });
+}
+
+        async function startAsync(age) {
+  if (age > 20) return `${age} success`;
+  else throw new Error(`${age} is not over 20`);
+}
+            // function startAsync(age) {
+            //     return new Promise((resolve, reject) => {
+            //         if (age > 20) resolve();
+            //         else reject();
+            //     });
+            //     }
+
+        setTimeout(()=>{
+            const promise1 = startAsync(25);
+            promise1
+                .then((value)=>{
+                    console.log(value);
+                })
+                .catch((error)=>{
+                    console.log(error)
+                });
+
+            const promise2 = startAsync(15);
+            promise2
+            .then((value)=>{
+                console.log(value);
+            })
+            .catch((error)=>{
+                console.log(error);
+            });
+        }, 1000);
+
+//         setTimeout(() => {
+//   const promise1 = startAsync(25);
+//   promise1
+//     .then(() => {
+//       console.log("1 then!");
+//     })
+//     .catch(() => {
+//       console.log("1 catch!");
+//     });
+//   const promise2 = startAsync(15);
+//   promise2
+//     .then(() => {
+//       console.log("2 then!");
+//     })
+//     .catch(() => {
+//       console.log("2 catch!");
+//     });
+// }, 1000);
+    </script>
+    
+</body>
+</html>
