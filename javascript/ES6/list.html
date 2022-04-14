@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>a</li>
+        <li>b</li>
+        <li>c</li>
+        <li>d</li>
+    </ul>
+    <script> // let과 var의 차이
+        // var list = document.querySelectorAll("li");
+        // for(let i = 0; i < list.length; i++) {
+        //     list[i].addEventListener("click", function(){
+        //         console.log(i + "번째");
+        //     })
+        // }
+
+        const data = [1, 2, undefined, NaN, 4, 5];
+        // data.forEach(function(value){
+        //     console.log("value is :", value);
+        // })
+
+        // for(let idx in data) {
+        //     console.log(data[idx]);
+        // }
+
+        for(let value of data){
+            console.log(data[0]);
+        }
+        
+
+        
+    </script>
+    
+</body>
+</html>
