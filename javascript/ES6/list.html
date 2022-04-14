@@ -8,10 +8,10 @@
 </head>
 <body>
     <ul>
-        <li>a</li>
-        <li>b</li>
-        <li>c</li>
-        <li>d</li>
+        <li>ae</li>
+        <li>be</li>
+        <li>ce</li>
+        <li>de</li>
     </ul>
     <script> // let과 var의 차이
         // var list = document.querySelectorAll("li");
@@ -21,7 +21,23 @@
         //     })
         // }
 
-        const data = [1, 2, undefined, NaN, 4, 5];
+
+
+        function print() {
+
+
+        let list = document.querySelectorAll("li");
+        let res = Array.from(list);
+        // console.log(toString.call(res)); // li는 노드리스트로 구성된 배열
+        let eres = res.filter(function(v) {
+            return v.innerText.includes("e"); //innerText 쓰는것 노드리스트??
+        })
+        console.log(eres);
+        }
+
+        print();
+
+        // const data = [1, 2, undefined, NaN, 4, 5];
         // data.forEach(function(value){
         //     console.log("value is :", value);
         // })
@@ -30,10 +46,21 @@
         //     console.log(data[idx]);
         // }
 
-        for(let value of data){
-            console.log(data[0]);
-        }
+        // for(let value of data){
+        //     console.log(data[0]);
+        // }
         
+        // function addMark() {
+        //     let newArray = Array.from(arguments);
+        //     let newData = newArray.map(function(value){
+        //         return value + "!";
+        //     });
+        //     console.log(newData);
+        // }
+
+        // addMark(1,2,3);
+        
+
 
         
     </script>
