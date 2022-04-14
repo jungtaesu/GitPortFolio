@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>피보나치</h1>
+    <form action="test.html" method="get">
+    <input type="text" placeholder="여기다가 입력"></input>
+    <input type="submit"></input><br>
+    <input >
+    </form>
+    <script>
+        function fevonachi(n) {
+            var last1 = 0;
+            var last2 = 1;
+            var result = 0;
+
+            for(let i = 1; i < n; i++) {
+                result = last1 + last2;
+                last1 = last2;
+                last2 = result;
+            }
+            return result;
+        }
+        console.log(fevonachi(10));
+        const x = fevonachi(10);
+        console.log(x);
+    </script>
+    
+</body>
+</html>
