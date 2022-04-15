@@ -1,14 +1,32 @@
-const express = require('express');
+const express = require('express'); //라이브러리
 const app = express();
+const nunjucks = require('nunjucks');
 // const cors = require('cors');
+app.set('view engine', 'html');
 
-app.get('/', (req, res)=>{
-    res.send("this is test");
+nunjucks.configure('views', {
+    express:app
 })
 
+// app.get('/', (req, res) => {
+//     res.render('index');
+// })
+
+// app.get('/2', (req, res) => {
+//     res.render('index2');
+// })
+
+// app.get('/', (req, res)=>{
+//     res.send("this is test");
+// })
+
 app.get('/getCookie', (req, res) => {
-    res.send({Token:true});
-    
+    res.setHeader('Set-Cookie','token=true');
+    res.send("toekn");
+})
+
+app.get('/', (req, res) => {
+    res.render("test");
 })
 
 const host = 'localhost';
