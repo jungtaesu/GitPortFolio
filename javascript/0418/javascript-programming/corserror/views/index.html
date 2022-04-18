@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        function init() {
+            axios.post("http://localhost:5000/getCookie", null, {
+                withCredentials:'true'
+            })
+            console.log('5000에 요청한다');
+        }
+        init();
+    </script>
+</head>
+<body>
+    5555 is open
+</body>
+</html>
