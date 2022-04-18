@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script type="text/javascript">
+        function init() {
+           axios.post('http://localhost:3000/getCookie', null, {
+            //     headers:{ //헤더 설정때문에 cors에러가 났었음. 이해가 안됨.
+            //         // 'Content-type' : 'application/x-www-form-urlencoded'
+            //         'Context-type' : 'application/json'
+            // },
+            withCredentials:'true' //요청할때 이 요청이 들ㅇ가있어야한다.
+             
+            })
+            console.log("3000에 요청한다.");
+        }
+        
+        init()
+    </script>
+
+</head>
+<body>
+    쿠키 가져오니?
+    
+</body>
+</html>
