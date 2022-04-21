@@ -49,31 +49,31 @@
 // }
 
 
-let testArray = [1, 2, 3, 4, 5];
-let testArray2 = new Array(5);
+// let testArray = [1, 2, 3, 4, 5];
+// let testArray2 = new Array(5);
 
-testArray[0] = 100;
+// testArray[0] = 100;
 
-for (let i = 0; i < testArray.length; i++) {
-    testArray[i];
-}
+// for (let i = 0; i < testArray.length; i++) {
+//     testArray[i];
+// }
 
-testArray.unshift(300);
-testArray.forEach(function (number, index, arr) {
-    console.log("4. number:", number, "index", index, "arr:", arr);
-})
+// testArray.unshift(300);
+// testArray.forEach(function (number, index, arr) {
+//     console.log("4. number:", number, "index", index, "arr:", arr);
+// })
 
-testArray.shift();
-testArray.forEach(function (number, index, arr) {
-    console.log("5. number:", number, "index", index, "arr:", arr);
-})
+// testArray.shift();
+// testArray.forEach(function (number, index, arr) {
+//     console.log("5. number:", number, "index", index, "arr:", arr);
+// })
 
-let arrayMultiple = testArray.map(x => x * 2); //배열의 요소들을 x에 담아서 하ㅏ하나 다 곱해준다.
-arrayMultiple.forEach(function (number, index, arr) {
-    console.log("6. number:", number, "index", index, "arr:", arr);
-})
+// let arrayMultiple = testArray.map(x => x * 2); //배열의 요소들을 x에 담아서 하ㅏ하나 다 곱해준다.
+// arrayMultiple.forEach(function (number, index, arr) {
+//     console.log("6. number:", number, "index", index, "arr:", arr);
+// })
 
-arrayMultiple.forEach(x => console.log(x));
+// arrayMultiple.forEach(x => console.log(x));
 
 
 ///↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 배열 공부 pop과 다르게 맨 앞 배열 인덱스에 붙이는 함수이기때문에 메모리가 많이 든다.
@@ -85,11 +85,11 @@ let arcPosX = canvas.width / 2;
 let arcPosY = canvas.height / 1.1; //공 시작위치 내리기 값이 커질수록 내려감
 let arcMoveDirX = -1;
 let arcMoveDirY = -1;
-let arcMoveSpd = 3;
+let arcMoveSpd = 2;
 let rectMoveDirX = 1;
 const barWidth = 100;
 const barHeight = 20;
-const arcRadius = 20;
+const arcRadius = 15;
 let barPosX = canvas.width / 2 - barWidth / 2; //막대바 왼쪽끝
 let barPosY = canvas.height - barHeight; //막대바 위 표면
 
@@ -150,16 +150,16 @@ class MovingBrick extends Brick {
     //여기에 상속받아서 위에 속성 갖고있는것과 같다
     drawblack(){
         if(this.isAlive) {
-        context.rect(this.left, this.bottom, brickWidth, brickHeight); //그림은 잘나옴.
+        context.rect(this.left, this.top, brickWidth, brickHeight); //그림은 잘나옴.
         context.fillStyle = "black";
         context.fill();
         }
     }
-    isCollisionWithBall(rectA, rectB){
-        if (rectA.left > rectB.right ||
-            rectA.right < rectB.left ||
-            rectA.top > rectB.bottom ||
-            rectA.bottom < rectB.top) {
+    isCollisionWithBall(rectA){
+        if (rectA.left > this.right ||
+            rectA.right < this.left ||
+            rectA.top > this.bottom ||
+            rectA.bottom < this.top) {
             return false;
         } //안겹친다
         return true; // 겹친다
@@ -175,7 +175,7 @@ class MovingBrick extends Brick {
 }
 let blackBrickPosX = canvas.width /2;
 let blackBrickPosY = canvas.height / 2;
-let blackBrick = new MovingBrick(blackBrickPosX-25, blackBrickPosY, blackBrickPosX + 25, blackBrickPosY + 20);
+let blackBrick = new MovingBrick(blackBrickPosX-25, blackBrickPosY, blackBrickPosX + 25, blackBrickPosY + 25);
 // blackBrick.movingAction();
 
 // function drawBlackBrick() {
@@ -317,10 +317,18 @@ function update() {
 
     // console.log("blackBrick: ", blackBrick);
     
-    if(isCollisionRectToRect(ball, blackBrick)) {
-        arcMoveDirY = -1;
-        // arcPosY += 1;
+    // if(isCollisionRectToRect(ball, blackBrick)) {
+    //     arcMoveDirY = -1;
+    //     // arcPosY += 1;
+    // }
+
+    // console.log("blackbrick:", blackBrick);
+    if(blackBrick.isCollisionWithBall(ball)) { //
+        console.log("터치 확인");
+        arcMoveDirX *= -1;
+        arcMoveDirY *= -1;
     }
+
 
     blackBrick.blackMove();
 
@@ -345,7 +353,7 @@ function update() {
 }
 
 function gameOver() {
-    if (arcPosY > 360) {
+    if (arcPosY > 370) {
         window.location.reload(true);
         alert("game over");
     }
@@ -360,7 +368,7 @@ function checkToWin() {
         //flat을 해준 상태에서 
 
         let deadBricks = bricks.flat().filter(brick => brick.isAlive == false); //조건을 확인해서 만족하는 요소들로만 배열을 새로 만든다.
-        console.log(bricks);
+        // console.log(bricks);
         if(deadBricks.length == brickColumn * brickRow){
             window.location.reload(true);
             alert("겜 클")
@@ -390,11 +398,7 @@ function draw() {
     
     blackBrick.drawblack();
     
-    console.log("blackbrick:", blackBrick);
-    if(blackBrick.isCollisionWithBall(ball, blackBrick)) {
-        console.log("터치 확인");
-        arcMoveDirX = -1;
-    }
+    
     
     drawRect();
     drawArc();
