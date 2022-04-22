@@ -11,6 +11,7 @@ function 아반떼() {
     return new Promise((resolve, reject)=>{ //backgroud에 들어간다 프로미스는 디폴트로 백그라운드
         setTimeout(()=>{
             resolve('아반떼 go');
+            console.log("아반떼")
         }, 1000)
     })
 }
@@ -19,6 +20,7 @@ function 소나타() {
     return new Promise((resolve, reject)=>{ //backgroud에 들어간다 프로미스는 디폴트로 백그라운드
         setTimeout(()=>{
             resolve('소나타 go');
+            console.log("소나타")
         }, 2000)
     })
 }
@@ -27,6 +29,7 @@ function 제네시스() {
     return new Promise((resolve, reject)=>{ //backgroud에 들어간다 프로미스는 디폴트로 백그라운드
         setTimeout(()=>{
             resolve('제네시스 go');
+            console.log("제네시스")
         }, 3000)
     })
 }
@@ -42,6 +45,10 @@ function 제네시스() {
     console.log(data);
 })
 
+// 아반떼();
+// 소나타();
+// 제네시스();
+
 async function 자동차() {
     const result= await 아반떼() //프로미스 객체에서 result(resolve) 값이 떨어진다.
     console.log(result); //프로미스는 콜백으로밖에 못받았다 왜냐하면 비동기잖아.
@@ -51,11 +58,11 @@ async function 자동차() {
     console.log(result3);
 }
 
-자동차();
+// 자동차();
 
 
 //resolve 안의 값이 then 안 data로 떨어진다.
-console.log(아반떼())//프로미스 객체
+// console.log(아반떼())//프로미스 객체
 
 // function 소나타(callback) {
 //     setTimeout(()=>{
