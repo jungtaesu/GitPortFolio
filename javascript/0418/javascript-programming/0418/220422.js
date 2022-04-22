@@ -2,10 +2,26 @@
     비동기처리 new Promise 호출과 동시에 비동기처리 시작
 */
 
-async function asynceCheckAdult(age) {
-    if(age >= 20) return age;
+async function asyncTimeOutCheckAdult(age, timeout) {
+    if(age >= 20) {
+    setTimeout(()=>{
+        console.log(`asyncTimeoutCcheck(${age})`);
+        return age;
+    }, timeout); 
+    }
+    else throw age;
+}
+
+async function asyncCheckAdult(age) {
+    if(age >= 20) {
+    return age;
+    }
     else throw age;
 } 
+
+
+//await : async 함수가 종료될 떄 까지 기다린다.
+
 //promise를 더 쉽게 쓰기위해 async await ↑사용↑↑↑↑↑↑
 
 // function asynceCheckAdult(age) {
@@ -14,8 +30,16 @@ async function asynceCheckAdult(age) {
 //         else reject(age);
 //     })
 // }
+async function testAsyncAwaitFunc() {
 
-const promiseCheckAdult = asynceCheckAdult(10); //21
+
+//존나 큰 코드라 10초걸리는 코드야. 그니까 밑에꺼 먼저 비동기때려.
+await asyncTimeOutCheckAdult(10000, 10000); //원래라면 얘가 실행안되면 밑도 실행안되는데 얘는 밑에먼저 실행
+// await asyncCheckAdult(10);      
+
+asyncTimeOutCheckAdult(2000, 2000) //await 때문이 아니라 그냥 셋타임때문에 그런거아님?
+
+const promiseCheckAdult = asyncCheckAdult(100); //21
 
 promiseCheckAdult.then((age)=>{
     console.log(`${age} is adult`)
@@ -23,13 +47,17 @@ promiseCheckAdult.then((age)=>{
     console.log(`${age} is kid`);
 })
 
-const promiseCheckAdult1 = asynceCheckAdult(21); //10일 때도 21먼저 출력
+const promiseCheckAdult1 = asyncCheckAdult(19); //10일 때도 21먼저 출력
 
 promiseCheckAdult1.then((age)=>{
     console.log(`${age} is adult`)
 }).catch((age)=>{
     console.log(`${age} is kid`);
-})
+});
+
+}
+
+testAsyncAwaitFunc();
 
     // const promise = new Promise((resolve, reject)=>{
     //     reject("reject");
