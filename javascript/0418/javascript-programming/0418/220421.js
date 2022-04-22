@@ -136,6 +136,7 @@ class Brick {
         this.bottom = bottom;
         this.isAlive = true;
         this.color = "green";
+        this.isItFinal = false;
     } //속성에 해당
     draw(){
         if(this.isAlive) {
@@ -144,6 +145,13 @@ class Brick {
         context.fill();
         }
     }
+    drawFinal() {
+        if(this.isItFinal) {
+        context.rect(this.left, this.top, brickWidth, brickHeight);
+        context.fillStyle = "purple";
+        context.fill();
+            }
+        }
 }
 
 class MovingBrick extends Brick {
@@ -282,10 +290,11 @@ function keyDownEventHandler(e) {
 
 context.clearRect(0, 0, canvas.width, canvas.height) //화면을 네모난 모양
 
-function update() {
+async function update() {
     //arcposx는 원의 중심이다.
     //여기는 캔버스의 끝과 닿으면 반대로 튕기는 코드
-    // blackBrick.blackMove();
+
+    await checkToWin("겜끝", 2000);//게임이 끝났지만 다른것들은 계속해서 1초동안 실행시키다가 끝난다.
 
     if (arcPosX - arcRadius < 0) {
         arcMoveDirX = 1;
@@ -329,7 +338,6 @@ function update() {
         arcMoveDirY *= -1;
     }
 
-
     blackBrick.blackMove();
 
     // 벽돌과 공 충돌확인
@@ -345,11 +353,7 @@ function update() {
             }
         }
     }
-
-    checkToWin();
-
     gameOver();
-
 }
 
 function gameOver() {
@@ -359,8 +363,47 @@ function gameOver() {
     }
 }
 
-function checkToWin() {
-   
+// function ChangeColor() {
+//     colors=["white", "blues", "purple"]
+//     for(let i = 0; i < colors.length; i++){
+//         setTimeout(()=>{
+//             canvas.style.backgroundColor = colors[i];
+//         }, 200)
+//     }
+// }
+
+function ChnageColor2() {
+    setTimeout(()=>{
+        canvas.style.backgroundColor = "white";
+        console.log("첫 변화")
+        setTimeout(()=>{
+            canvas.style.backgroundColor = "blues";
+            console.log("두번째 변화")
+            setTimeout(()=>{
+                canvas.style.backgroundColor = "purple";
+                console.log("세번째 변화")
+            }, 600)
+        }, 400)
+    },200)
+}
+
+// if(deadBricks.length == (brickColumn * brickRow) - 1 && AliveBricks == 1) {
+//     setTimeout(()=>{
+//         canvas.style.backgroundColor = "white";
+//         console.log("첫 변화")
+//         setTimeout(()=>{
+//             canvas.style.backgroundColor = "blues";
+//             console.log("두번째 변화")
+//             setTimeout(()=>{
+//                 canvas.style.backgroundColor = "purple";
+//                 console.log("세번째 변화")
+//             }, 600)
+//         }, 400)
+//     },200)
+// }
+
+
+function checkToWin(a, b) {
         //1.bricks 배열에 있는 정보
         
         // let flatBricks = bricks.flat();
@@ -368,10 +411,29 @@ function checkToWin() {
         //flat을 해준 상태에서 
 
         let deadBricks = bricks.flat().filter(brick => brick.isAlive == false); //조건을 확인해서 만족하는 요소들로만 배열을 새로 만든다.
-        // console.log(bricks);
+        // let AliveBricks = bricks.flat().filter(brick => brick.isAlive == true);
+                if(deadBricks.length == (brickColumn * brickRow) - 1) {
+            setTimeout(()=>{
+                canvas.style.backgroundColor = "white";
+                console.log("첫 변화")
+                setTimeout(()=>{
+                    canvas.style.backgroundColor = "blues";
+                    console.log("두번째 변화")
+                    setTimeout(()=>{
+                        canvas.style.backgroundColor = "purple";
+                        console.log("세번째 변화")
+                    }, 600)
+                }, 400)
+            },200)
+        }
+
         if(deadBricks.length == brickColumn * brickRow){
-            window.location.reload(true);
-            alert("겜 클")
+            // ChnageColor2();
+            setTimeout(() => {
+                window.location.reload(true);
+                alert(a)
+                
+            }, b)
         }
 
 }
@@ -397,9 +459,6 @@ function draw() {
     // drawBlackBrick();
     
     blackBrick.drawblack();
-    
-    
-    
     drawRect();
     drawArc();
     drawBricks();
