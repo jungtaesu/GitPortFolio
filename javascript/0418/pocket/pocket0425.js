@@ -154,7 +154,7 @@ function Rock() {
     if(pcNum == 0) {
         console.log("내가 이김")
         heroMoney += huntMoney
-    -+--------    alert("내가 이김")
+        alert("내가 이김")
     } else if(pcNum == 2) {
         console.log("내가 짐");
         alert("내가 짐")
@@ -192,7 +192,7 @@ function Paper() {
 
 
 function showMonster() {
-
+    
     const playdiv = document.getElementById("play");
 
     let monsterNum = Math.floor(Math.random() * 10);
