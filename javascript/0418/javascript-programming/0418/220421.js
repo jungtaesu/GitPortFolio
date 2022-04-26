@@ -258,8 +258,6 @@ function drawBricks() {
     context.closePath();
 }
 
-
-
 function keyDownEventHandler(e) {
     if (e.key == 'ArrowRight') { // && 조건문안에 이렇게 줬었는데 그냥 이중 if를 사용하자...
         if (barPosX + 100 < canvas.width) {
