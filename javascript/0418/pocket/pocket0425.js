@@ -46,7 +46,11 @@ class Tile {
             context.rect(this.left, this.top, TileWidth, TileHeight);
             context.fillStyle = this.color;
             context.fill();
-        }
+         } //else if(tileTypeNum == 1) {
+        //     context.rect(this.left, this.top, TileWidth, TileHeight);
+        //     context.fillStyle = "yellow";
+        //     context.fill();
+        // }
     }
 }
 
@@ -113,6 +117,7 @@ function keyDownEventHandler(e) {
         e.key == 'ArrowRight') {
         pcNum = Math.floor(Math.random() * 2);
         huntMoney = Math.floor(Math.random() * 10) + 15;
+        metMarket();
         // console.log("밖에서 hp찍자", heroHp);
 
             // console.log(pcNum);
@@ -149,7 +154,7 @@ function Rock() {
     if(pcNum == 0) {
         console.log("내가 이김")
         heroMoney += huntMoney
-        alert("내가 이김")
+    -+--------    alert("내가 이김")
     } else if(pcNum == 2) {
         console.log("내가 짐");
         alert("내가 짐")
@@ -233,6 +238,8 @@ function gameFail() {
 
 let randomMonsterI = Math.floor(Math.random() * 10);
 let randomMonsterJ = Math.floor(Math.random() * 10);
+let tileTypeNum;
+
 
 function setTiles() {
     tiles = [];
@@ -240,12 +247,22 @@ function setTiles() {
     for (let i = 0; i < 10; i++) {
         tiles[i] = []; //음 이유가 뭐지
         for (let j = 0; j < 10; j++) {
+            tileTypeNum = Math.floor(Math.random() * 3); //각 타일마다 난수생성
             tiles[i][j] = new Tile(
                 25 + i * (TileWidth + 5),
                 25 + j * (TileHeight + 5),
                 55 + i * (TileWidth + 5),
                 55 + j * (TileHeight + 5) ,
             )
+            // console.log(tiles[i][j], "TypeNum is ", tileTypeNum) //각 타일별 난수생성
+
+            if(tileTypeNum == 0) {
+                tiles[i][j].color = "yellow"; //모래
+            }else if(tileTypeNum == 1) {
+                tiles[i][j].color = "green"; //숲
+            } else if(tileTypeNum == 2) {
+                tiles[i][j].color = "purple"; //독
+            }
         }
     }
     //출구
@@ -253,17 +270,27 @@ function setTiles() {
     tiles[randomI][randomJ].color = "black"; // 좌표에 색깔값
 
     tiles[randomMonsterI][randomMonsterJ].color = "red";
-
 }
 
 function metMarket() {
    if(myHero.left - 5 == 25 + randomMonsterI * (TileWidth + 5) && myHero.top - 5 == 25 + randomMonsterJ * (TileHeight + 5)) {
-        alert("마켓이다.");    
+        let mart = prompt("마켓이다. hp 1 회복 = 50원 어쩔겨?", "");
+            console.log("내가 선택한 hp회복할 수량 :", mart);
+            if(mart > 0 && heroMoney > mart * 50) {
+                heroHp += parseInt(mart);
+                heroMoney -= mart * 50
+            } else if(mart == NaN || mart == 0 || mart == null) {
+                alert("바쁜데 뻘짓하지말고 꺼져라");
+            } else if(heroMoney < mart * 50) {
+                alert("거지새끼가;;;;");
+            } else alert("바쁜데 뻘짓하지말고 꺼져라");
    }
+   console.log(heroHp);
+    return heroHp;
 
 }
 
-function drawTiles() {
+function drawTiles() { //타일마다 다르게 그려주기
 
     for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
@@ -295,7 +322,7 @@ function drawBackGround() {
 function drawAll() {
     gameClear();
     gameFail();
-    // metMarket();
+
     drawBackGround();
     drawTiles();
     drawHero();
