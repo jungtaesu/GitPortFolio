@@ -46,7 +46,7 @@ class Tile {
             context.rect(this.left, this.top, TileWidth, TileHeight);
             context.fillStyle = this.color;
             context.fill();
-         } //else if(tileTypeNum == 1) {
+        } //else if(tileTypeNum == 1) {
         //     context.rect(this.left, this.top, TileWidth, TileHeight);
         //     context.fillStyle = "yellow";
         //     context.fill();
@@ -121,27 +121,27 @@ function keyDownEventHandler(e) {
         // console.log(tiles[0][0]);
         // console.log("밖에서 hp찍자", heroHp);
         showMonster();
-            // console.log(pcNum);
+        // console.log(pcNum);
     }
 }
 
 let pcNum;
 let huntMoney;
-console.log("huntmoney: " , huntMoney);
+console.log("huntmoney: ", huntMoney);
 
 function Scissor() {
     console.log("가위")
     myNum = 0;
-    if(pcNum == 2) {
+    if (pcNum == 2) {
         console.log("내가 이김")
         heroMoney += huntMoney
         alert("내가 이김")
-    } else if(pcNum == 1) {
+    } else if (pcNum == 1) {
         console.log("내가 짐");
         alert("내가 짐")
         heroHp -= 1
-     
-    } else if(pcNum == 0) {
+
+    } else if (pcNum == 0) {
         console.log("무승부");
         alert("무승부")
     }
@@ -152,16 +152,16 @@ function Scissor() {
 function Rock() {
     console.log("바위")
     myNum = 1;
-    if(pcNum == 0) {
+    if (pcNum == 0) {
         console.log("내가 이김")
         heroMoney += huntMoney
         alert("내가 이김")
-    } else if(pcNum == 2) {
+    } else if (pcNum == 2) {
         console.log("내가 짐");
         alert("내가 짐")
         heroHp -= 1
-      
-    } else if(pcNum == 1) {
+
+    } else if (pcNum == 1) {
         console.log("무승부");
         alert("무승부")
     }
@@ -172,16 +172,16 @@ function Rock() {
 function Paper() {
     console.log("보")
     myNum = 2;
-    if(pcNum == 0) {
+    if (pcNum == 0) {
         console.log("내가 짐")
         alert("내가 짐")
         heroHp -= 1
-       
-    } else if(pcNum == 1) {
+
+    } else if (pcNum == 1) {
         console.log("내가 이김");
         heroMoney += huntMoney
         alert("내가 이김")
-    } else if(pcNum == 2) {
+    } else if (pcNum == 2) {
         console.log("무승부");
         alert("무승부")
     }
@@ -200,36 +200,36 @@ function Paper() {
 // }
 function isCollisionRectToRect(rectA, rectB) {
     if (rectA.left == rectB.left - 5 &&
-        rectA.top == rectB.top - 5 ) {
+        rectA.top == rectB.top - 5) {
         return true;
     }//안겹친다
     return false; // 겹친다
 }
 
 function showMonster() {
-    
+
     const playdiv = document.getElementById("play");
 
     let monsterNum = Math.floor(Math.random() * 10);
     console.log(monsterNum);
     let isMeetMonster = false; //포문을 두개다 빠져나가는
-    for(let i = 0; i < 10; i++){
-        for(let j = 0; j < 10; j++){
-            if(isCollisionRectToRect(tiles[i][j], myHero)) {
+    for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+            if (isCollisionRectToRect(tiles[i][j], myHero)) {
                 if (monsterNum < 2) {
-                    if(tiles[i][j].color == "green") {
+                    if (tiles[i][j].color == "green") {
                         console.log(tiles[i][j]);
                         alert("초록괴물을 만나다");
                         isMeetMonster = true;
                         playdiv.style.visibility = "visible";
                         break;
-                    } else if(tiles[i][j].color == "yellow"){
+                    } else if (tiles[i][j].color == "yellow") {
                         console.log(tiles[i][j]);
                         alert("노란괴물을 만나다");
                         isMeetMonster = true;
                         playdiv.style.visibility = "visible";
                         break;
-                    } else if(tiles[i][j].color == "purple"){
+                    } else if (tiles[i][j].color == "purple") {
                         console.log(tiles[i][j]);
                         alert("독괴물을 만나다");
                         isMeetMonster = true;
@@ -239,11 +239,11 @@ function showMonster() {
                 } else {
                     playdiv.style.visibility = "hidden";
                 }
-            } else ( console.log("지나가요"))
+            } else (console.log("지나가요"))
         }
-        if(isMeetMonster == true) break; //첫 for문을 빠져나갈때
+        if (isMeetMonster == true) break; //첫 for문을 빠져나갈때
     }
-    
+
     document.getElementById("hHp").innerHTML = `HP: ${heroHp}`
     document.getElementById("hMoney").innerHTML = `money: ${heroMoney}`
 }
@@ -269,7 +269,7 @@ function gameClear() {
 }
 
 function gameFail() {
-    if(heroHp == 0) {
+    if (heroHp == 0) {
         window.location.reload(true);
         alert("Game Over");
     }
@@ -295,11 +295,11 @@ function setTiles() {
             )
             // console.log(tiles[i][j], "TypeNum is ", tileTypeNum) //각 타일별 난수생성
 
-            if(tileTypeNum == 0) {
+            if (tileTypeNum == 0) {
                 tiles[i][j].color = "yellow"; //모래
-            }else if(tileTypeNum == 1) {
+            } else if (tileTypeNum == 1) {
                 tiles[i][j].color = "green"; //숲
-            } else if(tileTypeNum == 2) {
+            } else if (tileTypeNum == 2) {
                 tiles[i][j].color = "purple"; //독
             }
         }
@@ -312,20 +312,20 @@ function setTiles() {
 }
 
 function metMarket() {
-   if(myHero.left - 5 == 25 + randomMonsterI * (TileWidth + 5) && myHero.top - 5 == 25 + randomMonsterJ * (TileHeight + 5)) {
+    if (myHero.left - 5 == 25 + randomMonsterI * (TileWidth + 5) && myHero.top - 5 == 25 + randomMonsterJ * (TileHeight + 5)) {
         let mart = prompt("마켓이다. hp 1 회복 = 50원 어쩔겨?", "");
-            console.log("내가 선택한 hp회복할 수량 :", mart);
-            if(mart > 0 && heroMoney > mart * 50) {
-                heroHp += parseInt(mart);
-                heroMoney -= mart * 50
-                alert("회복해놨어 확인해봐")
-            } else if(mart == NaN || mart == 0 || mart == null) {
-                alert("바쁜데 뻘짓하지말고 꺼져라");
-            } else if(heroMoney < mart * 50) {
-                alert("거지새끼가;;;;");
-            } else alert("바쁜데 뻘짓하지말고 꺼져라");
-   }
-//    console.log(heroHp);
+        console.log("내가 선택한 hp회복할 수량 :", mart);
+        if (mart > 0 && heroMoney > mart * 50) {
+            heroHp += parseInt(mart);
+            heroMoney -= mart * 50
+            alert("회복해놨어 확인해봐")
+        } else if (mart == NaN || mart == 0 || mart == null) {
+            alert("바쁜데 뻘짓하지말고 꺼져라");
+        } else if (heroMoney < mart * 50) {
+            alert("거지새끼가;;;;");
+        } else alert("바쁜데 뻘짓하지말고 꺼져라");
+    }
+    //    console.log(heroHp);
     return heroHp;
 
 }
