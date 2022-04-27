@@ -222,18 +222,24 @@ function showMonster() {
                         alert("초록괴물을 만나다");
                         isMeetMonster = true;
                         playdiv.style.visibility = "visible";
+                        heroMoveDirX = 0;
+                        heroMoveDirY = 0;
                         break;
                     } else if (tiles[i][j].color == "yellow") {
                         console.log(tiles[i][j]);
                         alert("노란괴물을 만나다");
                         isMeetMonster = true;
                         playdiv.style.visibility = "visible";
+                        heroMoveDirX = 0;
+                        heroMoveDirY = 0;
                         break;
                     } else if (tiles[i][j].color == "purple") {
                         console.log(tiles[i][j]);
                         alert("독괴물을 만나다");
                         isMeetMonster = true;
                         playdiv.style.visibility = "visible";
+                        heroMoveDirX = 0;
+                        heroMoveDirY = 0;
                         break;
                     }
                 } else {
