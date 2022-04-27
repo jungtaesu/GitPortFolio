@@ -279,6 +279,7 @@ function metMarket() {
             if(mart > 0 && heroMoney > mart * 50) {
                 heroHp += parseInt(mart);
                 heroMoney -= mart * 50
+                alert("회복해놨어 확인해봐")
             } else if(mart == NaN || mart == 0 || mart == null) {
                 alert("바쁜데 뻘짓하지말고 꺼져라");
             } else if(heroMoney < mart * 50) {
