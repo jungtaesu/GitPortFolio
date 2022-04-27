@@ -2,8 +2,8 @@
 
 
   n = 5;
-  lost = [2, 4];
-  reserve = [3];
+  lost = [1];
+  reserve = [1, 3, 5];
 //  *
 //  * 일단 reserve에서 lost에 있는 것을 빼야한다. => uLost, uReserve
 //  * uReserve의 탐색을 빠르게 하기 위해 Set으로 한다.
@@ -14,7 +14,7 @@ function solution(n, lost, reserve) {
   console.log("uLost:", uLost);
   const uReserve = new Set(reserve.filter((item) => !lost.includes(item))); // item은 3인데 filter를 통해  !lost.includes(item) 이러한 애들로 uReserve를 꾸린다.
   console.log("uReserve :",uReserve);
-  let result = n - uLost.length;
+  let result = n - uLost.length; //여기서 result 가 3이네
   uLost.forEach((lostItem) => { // 여기서 lost Item은 2, 4
     // console.log("forEach문 안에 :", lostItem)
     //   (uLost.forEach(lostItem => console.log("lostitem:", lostItem)));
@@ -25,7 +25,7 @@ function solution(n, lost, reserve) {
       result += 1;
     } else if (uReserve.has(lostItem + 1)) {
         console.log("if문 안에 :", uReserve)
-      uReserve.delete(lostItem + 1);
+      uReserve.delete(lostItem + 1); 
       console.log("if문 안에 delete 이후 :", uReserve)
       result += 1;
     }
