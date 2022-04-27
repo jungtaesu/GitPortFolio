@@ -72,7 +72,7 @@ function keyDownEventHandler(e) {
     if (e.key == 'ArrowRight') {
         if (heroPsxLeft + heroWidth < 365) {
             heroMoveDirX = 35;
-            showMonster()
+            // showMonster()
             heroPsxLeft += heroMoveDirX;
             myHero.left = heroPsxLeft;
             // console.log(myHero);
@@ -84,7 +84,7 @@ function keyDownEventHandler(e) {
     }
     else if (e.key == 'ArrowLeft') {
         if (heroPsxLeft > 30) {
-            showMonster()
+            // showMonster()
             // console.log("15x다운")
             heroMoveDirX = -35;
             heroPsxLeft += heroMoveDirX;
@@ -94,7 +94,7 @@ function keyDownEventHandler(e) {
     if (e.key == 'ArrowUp') {
         console.log("화살 위");
         if (heroPsxTop > 30) {
-            showMonster()
+            // showMonster()
             heroMoveDirY = -35;
             heroPsxTop += heroMoveDirY;
             myHero.top = heroPsxTop;
@@ -104,7 +104,7 @@ function keyDownEventHandler(e) {
 
         if (heroPsxTop + 20 < 360) {
             console.log("화살아래")
-            showMonster()
+            // showMonster()
             heroMoveDirY = 35;
             heroPsxTop += heroMoveDirY;
             myHero.top = heroPsxTop;
@@ -118,8 +118,9 @@ function keyDownEventHandler(e) {
         pcNum = Math.floor(Math.random() * 2);
         huntMoney = Math.floor(Math.random() * 10) + 15;
         metMarket();
+        // console.log(tiles[0][0]);
         // console.log("밖에서 hp찍자", heroHp);
-
+        showMonster();
             // console.log(pcNum);
     }
 }
@@ -188,23 +189,61 @@ function Paper() {
     return heroHp;
 }
 
-
-
+// function isCollisionRectToRect(rectA, rectB) {
+//             if (rectA.left > rectB.right - 5 ||
+//                 rectA.right < rectB.left - 5 ||
+//                 rectA.top > rectB.bottom - 5 ||
+//                 rectA.bottom < rectB.top- 5) {
+//                 return false;
+//             }//안겹친다
+//             return true; // 겹친다
+// }
+function isCollisionRectToRect(rectA, rectB) {
+    if (rectA.left == rectB.left - 5 &&
+        rectA.top == rectB.top - 5 ) {
+        return true;
+    }//안겹친다
+    return false; // 겹친다
+}
 
 function showMonster() {
     
     const playdiv = document.getElementById("play");
 
     let monsterNum = Math.floor(Math.random() * 10);
-    // console.log(monsterNum);
-
-    if (monsterNum < 1) {
-        alert("몹을 만나다");
-        playdiv.style.visibility = "visible";
-    } else {
-        playdiv.style.visibility = "hidden";
+    console.log(monsterNum);
+    let isMeetMonster = false; //포문을 두개다 빠져나가는
+    for(let i = 0; i < 10; i++){
+        for(let j = 0; j < 10; j++){
+            if(isCollisionRectToRect(tiles[i][j], myHero)) {
+                if (monsterNum < 2) {
+                    if(tiles[i][j].color == "green") {
+                        console.log(tiles[i][j]);
+                        alert("초록괴물을 만나다");
+                        isMeetMonster = true;
+                        playdiv.style.visibility = "visible";
+                        break;
+                    } else if(tiles[i][j].color == "yellow"){
+                        console.log(tiles[i][j]);
+                        alert("노란괴물을 만나다");
+                        isMeetMonster = true;
+                        playdiv.style.visibility = "visible";
+                        break;
+                    } else if(tiles[i][j].color == "purple"){
+                        console.log(tiles[i][j]);
+                        alert("독괴물을 만나다");
+                        isMeetMonster = true;
+                        playdiv.style.visibility = "visible";
+                        break;
+                    }
+                } else {
+                    playdiv.style.visibility = "hidden";
+                }
+            } else ( console.log("지나가요"))
+        }
+        if(isMeetMonster == true) break; //첫 for문을 빠져나갈때
     }
-
+    
     document.getElementById("hHp").innerHTML = `HP: ${heroHp}`
     document.getElementById("hMoney").innerHTML = `money: ${heroMoney}`
 }
@@ -286,7 +325,7 @@ function metMarket() {
                 alert("거지새끼가;;;;");
             } else alert("바쁜데 뻘짓하지말고 꺼져라");
    }
-   console.log(heroHp);
+//    console.log(heroHp);
     return heroHp;
 
 }
