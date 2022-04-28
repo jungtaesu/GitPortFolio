@@ -18,7 +18,7 @@ const initHttpServer = (myHttpPort) =>{
         res.send(getBlocks());
     })
 
-    app.post('/create', (req, res)=>{
+    app.post('/createBlock', (req, res)=>{
         const data = req.body.data // postman에 바디에 넣는 값이 바뀔때마다 값을 받아오는 방법.
         res.send(createBlock(data));
     })
